@@ -23,7 +23,6 @@ function launchModal() {
 
 //Close modal event
 closeModalBtn.forEach((elt) => {
-    console.log("close")
     elt.addEventListener("click", closeModal);
 });
 
