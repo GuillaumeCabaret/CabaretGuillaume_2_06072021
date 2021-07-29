@@ -10,6 +10,11 @@
     padding: 0;
 }
 
+.disable-scroll {
+    height: 100%;
+    overflow: hidden;
+}
+
 
 /* Landing Page */
 
@@ -17,7 +22,6 @@ body {
     margin: 0;
     display: flex;
     flex-direction: column;
-    background-image: url("");
     font-family: var(--font-default);
     font-size: 18px;
     max-width: 1300px;
@@ -29,21 +33,18 @@ p {
     padding: 0.5vw;
 }
 
-img {
-    padding-right: 1rem;
-}
-
 .topnav {
+    display: flex;
+    justify-content: space-between;
     overflow: hidden;
-    margin: 3.5%;
+    margin: 40px 20px;
+    padding-left: 2vw;
+    padding-right: 2vw;
 }
 
 .header-logo {
     float: left;
-}
-
-.main-navbar {
-    float: right;
+    margin-right: 15px;
 }
 
 .topnav a {
@@ -72,43 +73,6 @@ img {
 
 .topnav .icon {
     display: none;
-}
-
-@media screen and (max-width: 768px) {
-    .topnav a {
-        display: none;
-    }
-    .topnav a.icon {
-        float: right;
-        display: block;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    .topnav.responsive {
-        position: relative;
-    }
-    .topnav.responsive .icon {
-        position: absolute;
-        right: 0;
-        top: 0;
-    }
-    .topnav.responsive a {
-        float: none;
-        display: block;
-        text-align: left;
-    }
-}
-
-@media screen and (max-width: 540px) {
-    .topnav a {
-        display: none;
-    }
-    .topnav a.icon {
-        float: right;
-        display: block;
-        margin-top: -15px;
-    }
 }
 
 main {
@@ -179,9 +143,10 @@ main {
 }
 
 .content {
-    margin: 5% auto;
+    margin: auto;
     width: 100%;
-    max-width: 500px;
+    height: max-content;
+    max-width: 550px;
     animation-name: modalopen;
     animation-duration: var(--modal-duration);
     background: #232323;
@@ -195,6 +160,24 @@ main {
 .modal-body {
     padding: 15px 8%;
     margin: 15px auto;
+}
+
+.modal-body__confirmation {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    z-index: 99999;
+    top: 35px;
+    background: #232323;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.valid {
+    width: 5em;
+    margin: 3rem 0 0 10rem;
 }
 
 label {
@@ -222,7 +205,7 @@ input {
 
 .formData[data-error]::after {
     content: attr(data-error);
-    font-size: 0.4em;
+    font-size: 0.6em;
     color: #e54858;
     display: block;
     margin-top: 7px;
@@ -238,7 +221,7 @@ input {
 }
 
 .formData[data-error-visible="true"] .text-control {
-    border: 2px solid #e54858;
+    border: 3px solid #e54858;
 }
 
 
@@ -351,7 +334,8 @@ input[data-error]::after {
 }
 
 .btn-submit,
-.btn-signup {
+.btn-signup,
+.btn-close {
     background: #fe142f;
     display: block;
     margin: 0 auto;
@@ -361,6 +345,11 @@ input[data-error]::after {
     color: #fff;
     cursor: pointer;
     border: 0;
+}
+
+.btn-close {
+    position: relative;
+    top: 37.5%;
 }
 
 
@@ -487,7 +476,7 @@ input[data-error]::after {
 .hero-headline {
     font-size: 6rem;
     font-weight: normal;
-    white-space: nowrap;
+    width: 80vw;
 }
 
 .hero-text {
@@ -499,7 +488,6 @@ input[data-error]::after {
 
 .btn-signup {
     outline: none;
-    text-transform: capitalize;
     font-size: 1.3rem;
     padding: 15px 23px;
     margin: 0;
@@ -535,7 +523,35 @@ footer {
     margin: 0 20px;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 768px) {
+    .topnav {
+        margin: 10px 20px;
+    }
+    .topnav a {
+        display: none;
+    }
+    .topnav a.icon {
+        float: right;
+        display: block;
+    }
+    .topnav.responsive {
+        position: relative;
+        flex-wrap: wrap;
+    }
+    .topnav.responsive .icon {
+        position: absolute;
+        right: 13px;
+        top: 0;
+    }
+    .topnav.responsive a {
+        float: none;
+        display: block;
+        text-align: left;
+    }
+    .header-logo img {
+        width: 10rem;
+        margin-top: 12px;
+    }
     .hero-section {
         display: block;
         box-shadow: unset;
@@ -543,7 +559,8 @@ footer {
     .hero-content {
         background: #fff;
         color: #000;
-        padding: 20px;
+        padding: 0;
+        min-width: unset;
     }
     .hero-content::after {
         content: unset;
@@ -552,12 +569,12 @@ footer {
         display: none;
     }
     .hero-headline {
-        font-size: 4.5rem;
-        white-space: normal;
+        font-size: 3.5rem;
     }
     .hero-text {
         width: unset;
         font-size: 1.5rem;
+        margin-top: 25px;
     }
     .hero-img img {
         border-radius: 10px;
@@ -571,6 +588,22 @@ footer {
     .copyrights {
         margin-top: 50px;
         text-align: center;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .hero-headline {
+        font-size: 2.5rem;
+    }
+    .hero-text {
+        font-size: 1rem;
+    }
+    .content {
+        top: 70px;
+        margin: 0 auto;
+    }
+    .bground {
+        background-color: initial;
     }
 }
 
